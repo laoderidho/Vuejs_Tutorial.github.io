@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app" v-cloak>
+        {{HelloWorld}}
+
+        <!-- di bawah ini adalah sebuah tombol jika di klik dia akan memunculkan secara toogle diplay saya -->
+        <br>
+        <button v-on:click="conditional = !conditional">Click me</button> 
+        <br>
+        <!-- sama saja untuk perintahnya -->
+        <button @click="conditional = !conditional">Click me </button> 
+
+        <br>
+        <!-- Ini untuk memanggil function -->
+        <button @click="thisMethod">Click me</button>
+
+        <label for="">Masukkan Nama Anda</label>
+        <!-- keyup.enter mengisyaratkan bahwa jika kita input dan kita tekan enter maka method greet akan di jalankan -->
+        <input type="text" @keyup.enter="greet(HelloWorld)" v-model="HelloWorld">
+        <p v-if="conditional">Ini adalah display saya</p>
+    </div>
+
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        let app = Vue.createApp({
+            data: ()=>{
+                return{
+                    HelloWorld : '',
+                    conditional : false,
+
+                }
+            },
+            methods: {
+               thisMethod() {
+                // this di bawah ini mengambil dari variable yang ada di dalam return data
+                    this.conditional = !this.conditional
+                },
+                greet(HelloWorld){
+                    alert(`Hello ${HelloWorld}`)
+                }
+            }, 
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>
